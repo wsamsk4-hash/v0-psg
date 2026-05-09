@@ -52,6 +52,7 @@
   --emerald-dark: oklch(0.45 0.18 160);
   --midnight: oklch(0.08 0.01 270);
   --midnight-light: oklch(0.15 0.02 270);
+  --neon-green: oklch(0.78 0.25 145);
 }
 
 @theme inline {
@@ -93,6 +94,7 @@
   --color-emerald-dark: var(--emerald-dark);
   --color-midnight: var(--midnight);
   --color-midnight-light: var(--midnight-light);
+  --color-neon-green: var(--neon-green);
 }
 
 @layer base {
@@ -141,6 +143,39 @@
   }
 }
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes coin-rotate {
+  0%, 100% {
+    transform: rotateY(0deg) scale(1);
+  }
+  25% {
+    transform: rotateY(15deg) scale(1.02);
+  }
+  50% {
+    transform: rotateY(0deg) scale(1);
+  }
+  75% {
+    transform: rotateY(-15deg) scale(1.02);
+  }
+}
+
 .animate-pulse-gold {
   animation: pulse-gold 2s ease-in-out infinite;
 }
@@ -157,6 +192,18 @@
   background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 6s linear infinite;
+}
+
+.animate-coin-rotate {
+  animation: coin-rotate 4s ease-in-out infinite;
 }
 
 /* Glassmorphism */

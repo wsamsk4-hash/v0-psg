@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Package, ShoppingBag, Users } from "lucide-react"
+import { Home, Package, Wallet, Users } from "lucide-react"
 
 interface BottomNavProps {
   activeTab: string
@@ -10,7 +10,7 @@ interface BottomNavProps {
 const navItems = [
   { id: "home", label: "الرئيسية", icon: Home },
   { id: "packages", label: "الباقات", icon: Package },
-  { id: "store", label: "المتجر", icon: ShoppingBag },
+  { id: "withdraw", label: "السحب", icon: Wallet },
   { id: "team", label: "الفريق", icon: Users },
 ]
 
