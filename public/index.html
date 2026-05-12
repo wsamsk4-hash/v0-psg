@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PSG Dinars - منصة التعدين الذهبية</title>
+  <meta name="description" content="منصة PSG Dinars للاستثمار والتعدين الرقمي">
+  <meta name="theme-color" content="#0a1628">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F4D03F;
+      --gold-dark: #B8860B;
+      --emerald: #50C878;
+      --emerald-dark: #2E8B57;
+      --royal-blue: #0a1628;
+      --royal-blue-light: #0f2240;
+      --royal-blue-lighter: #152a4a;
+      --neon-green: #00FF88;
+      --background: #0a1628;
+      --foreground: #F5F5F5;
+      --muted: rgba(255,255,255,0.6);
+    }
+
+    body {
+      font-family: 'Cairo', 'Segoe UI', sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .font-english {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Carbon Fiber Background */
+    .carbon-bg {
+      background-image: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.02) 2px,
+          rgba(255,255,255,0.02) 4px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.02) 2px,
+          rgba(255,255,255,0.02) 4px
+        );
+    }
+
+    /* Animations */
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spin-reverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+    }
+
+    @keyframes counter-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+    .animate-spin-reverse { animation: spin-reverse 6s linear infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-shimmer {
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    /* App Container */
+    .app-container {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 80px;
+    }
+
+    /* Login Screen */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(180deg, var(--royal-blue) 0%, var(--royal-blue-light) 100%);
+    }
+
+    .login-logo {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .hexagon {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(212,175,55,0.5);
+    }
+
+    .hexagon-inner {
+      width: 85%;
+      height: 85%;
+      background: var(--royal-blue);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .login-btn {
+      width: 100%;
+      max-width: 300px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: none;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn-google {
+      background: white;
+      color: #333;
+    }
+
+    .login-btn-facebook {
+      background: #1877F2;
+      color: white;
+    }
+
+    .login-btn-guest {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      margin-top: 20px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: linear-gradient(180deg, var(--royal-blue-light) 0%, transparent 100%);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-hex {
+      width: 40px;
+      height: 40px;
+    }
+
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vip-badge {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: var(--royal-blue);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: var(--royal-blue-lighter);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      margin: 0 16px 20px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-currency {
+      font-size: 14px;
+      color: var(--emerald);
+      font-weight: 600;
+    }
+
+    /* Mining Engine */
+    .mining-section {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mining-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--gold);
+    }
+
+    .mining-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mining-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid transparent;
+    }
+
+    .mining-ring-1 {
+      width: 200px;
+      height: 200px;
+      border-color: rgba(212,175,55,0.3);
+      border-top-color: var(--gold);
+      animation: spin-slow 8s linear infinite;
+    }
+
+    .mining-ring-2 {
+      width: 170px;
+      height: 170px;
+      border-color: rgba(80,200,120,0.2);
+      border-bottom-color: var(--emerald);
+      animation: spin-reverse 6s linear infinite;
+    }
+
+    .mining-ring-3 {
+      width: 140px;
+      height: 140px;
+      border-color: rgba(212,175,55,0.2);
+      border-left-color: var(--gold-light);
+      animation: spin-slow 4s linear infinite;
+    }
+
+    .mining-core {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .mining-hexagon {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(212,175,55,0.6);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .mining-inner {
+      width: 80%;
+      height: 80%;
+      background: var(--royal-blue);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mining-icon {
+      color: var(--gold);
+    }
+
+    .orbit-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    .orbit-1 { animation: orbit 4s linear infinite; }
+    .orbit-2 { animation: orbit 6s linear infinite reverse; animation-delay: -2s; }
+    .orbit-3 { animation: orbit 5s linear infinite; animation-delay: -1s; }
+
+    .mining-counter {
+      margin-top: 24px;
+      text-align: center;
+      animation: counter-pulse 2s ease-in-out infinite;
+    }
+
+    .counter-value {
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--neon-green) 0%, var(--emerald) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .counter-label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .expected-reward {
+      margin-top: 16px;
+      padding: 12px 24px;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .expected-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .expected-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* Progress Bar */
+    .progress-section {
+      padding: 0 16px 20px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .progress-time {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--royal-blue-lighter);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--emerald) 0%, var(--neon-green) 100%);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* Stats Cards */
+    .stats-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 16px 20px;
+    }
+
+    .stats-card {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.8) 0%, rgba(10,22,40,0.8) 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .stats-card-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .stats-card-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--neon-green);
+    }
+
+    .stats-card-value.gold {
+      color: var(--gold);
+    }
+
+    /* Subscription Tiers */
+    .tiers-section {
+      padding: 0 16px 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--gold);
+      text-align: center;
+    }
+
+    .tier-card {
+      padding: 20px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tier-card.basic { border: 1px solid #CD7F32; }
+    .tier-card.silver { border: 1px solid #C0C0C0; }
+    .tier-card.gold-vip { border: 1px solid var(--gold); }
+    .tier-card.elite { border: 1px solid #B9F2FF; }
+
+    .tier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .tier-name-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tier-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .tier-icon.basic { background: linear-gradient(135deg, #CD7F32, #8B4513); }
+    .tier-icon.silver { background: linear-gradient(135deg, #C0C0C0, #808080); }
+    .tier-icon.gold-vip { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); }
+    .tier-icon.elite { background: linear-gradient(135deg, #B9F2FF, #00CED1); }
+
+    .tier-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .tier-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .tier-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .tier-detail {
+      text-align: center;
+      padding: 10px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+
+    .tier-detail-label {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .tier-detail-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    .tier-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tier-btn.basic { background: linear-gradient(135deg, #CD7F32, #8B4513); color: white; }
+    .tier-btn.silver { background: linear-gradient(135deg, #C0C0C0, #808080); color: #333; }
+    .tier-btn.gold-vip { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--royal-blue); }
+    .tier-btn.elite { background: linear-gradient(135deg, #B9F2FF, #00CED1); color: var(--royal-blue); }
+
+    .tier-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Referral Section */
+    .referral-section {
+      padding: 0 16px 20px;
+    }
+
+    .referral-card {
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 16px;
+    }
+
+    .referral-code-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .referral-code {
+      flex: 1;
+      padding: 12px;
+      background: var(--royal-blue-lighter);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 10px;
+      font-family: 'Montserrat', monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .copy-btn {
+      padding: 12px 16px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .copy-btn svg {
+      color: var(--royal-blue);
+    }
+
+    .referral-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .referral-stat {
+      text-align: center;
+      padding: 12px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+
+    .referral-stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--emerald);
+    }
+
+    .referral-stat-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      background: linear-gradient(180deg, rgba(10,22,40,0.95) 0%, var(--royal-blue) 100%);
+      border-top: 1px solid rgba(212,175,55,0.2);
+      padding: 12px 0;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 12px;
+    }
+
+    .nav-item.active {
+      background: rgba(212,175,55,0.1);
+    }
+
+    .nav-item.active .nav-icon {
+      color: var(--gold);
+    }
+
+    .nav-item.active .nav-label {
+      color: var(--gold);
+    }
+
+    .nav-icon {
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+
+    /* Wallet Page */
+    .wallet-page, .profile-page, .packages-page {
+      padding: 20px 16px;
+      display: none;
+    }
+
+    .wallet-balance {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .wallet-balance-label {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .wallet-balance-value {
+      font-size: 40px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .wallet-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .wallet-action-btn {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .wallet-action-btn:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .wallet-action-btn svg {
+      color: var(--gold);
+    }
+
+    .wallet-action-label {
+      font-size: 12px;
+      color: var(--foreground);
+    }
+
+    /* Profile Page */
+    .profile-header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: var(--royal-blue-lighter);
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .profile-email {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .profile-menu {
+      background: linear-gradient(135deg, rgba(15,34,64,0.9) 0%, rgba(10,22,40,0.9) 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .profile-menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .profile-menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .profile-menu-item:hover {
+      background: rgba(212,175,55,0.05);
+    }
+
+    .profile-menu-item-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-menu-item svg {
+      color: var(--gold);
+    }
+
+    .logout-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 12px;
+      color: #EF4444;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: rgba(239,68,68,0.2);
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--royal-blue);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(212,175,55,0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin-slow 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    /* Hidden */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--royal-blue-lighter);
+      border: 1px solid var(--gold);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      z-index: 200;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="carbon-bg">
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div style="color: var(--gold); font-size: 18px; font-weight: 600;">جاري التحميل...</div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">تم النسخ بنجاح!</div>
+
+  <div class="app-container" id="appContainer">
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+      <div class="login-logo animate-float">
+        <div class="hexagon">
+          <div class="hexagon-inner">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <h1 class="login-title font-english">PSG Dinars</h1>
+      <p class="login-subtitle">منصة التعدين الذهبية الرائدة</p>
+
+      <button class="login-btn login-btn-google" onclick="handleLogin('google')">
+        <svg width="20" height="20" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        تسجيل الدخول بجوجل
+      </button>
+
+      <button class="login-btn login-btn-facebook" onclick="handleLogin('facebook')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        تسجيل الدخول بفيسبوك
+      </button>
+
+      <button class="login-btn login-btn-guest" onclick="handleLogin('guest')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        الدخول كزائر
+      </button>
+    </div>
+
+    <!-- Main App -->
+    <div class="main-app hidden" id="mainApp">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <div class="logo-hex">
+            <div class="hexagon" style="width: 40px; height: 40px;">
+              <div class="hexagon-inner" style="width: 85%; height: 85%;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <span class="logo-text font-english">PSG Dinars</span>
+        </div>
+        <div class="user-profile">
+          <span class="vip-badge">VIP</span>
+          <div class="avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- Home Page -->
+      <div class="home-page" id="homePage">
+        <!-- Hero Card -->
+        <div class="hero-card">
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-label">رصيد العملات</div>
+              <div class="stat-value" id="balanceDisplay">12,450</div>
+              <div class="stat-currency">نقطة</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">الأرباح الكلية</div>
+              <div class="stat-value">47,890</div>
+              <div class="stat-currency">نقطة</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mining Engine -->
+        <div class="mining-section">
+          <h2 class="mining-title">العداد الرئيسي</h2>
+          <div class="mining-container">
+            <div class="mining-ring mining-ring-1"></div>
+            <div class="mining-ring mining-ring-2"></div>
+            <div class="mining-ring mining-ring-3"></div>
+            <div class="orbit-particle orbit-1"></div>
+            <div class="orbit-particle orbit-2" style="animation-delay: -2s;"></div>
+            <div class="orbit-particle orbit-3" style="animation-delay: -4s;"></div>
+            <div class="mining-core">
+              <div class="mining-hexagon">
+                <div class="mining-inner">
+                  <svg class="mining-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mining-counter">
+            <div class="counter-value" id="miningCounter">0.00000</div>
+            <div class="counter-label">نقطة في الثانية</div>
+          </div>
+
+          <div class="expected-reward">
+            <div class="expected-label">العائد المتوقع اليوم</div>
+            <div class="expected-value">7,140 نقطة</div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-label">التقدم اليومي</span>
+            <span class="progress-time" id="progressTime">23:45:30</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 35%;"></div>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+          <div class="stats-card">
+            <div class="stats-card-label">أرباح اليوم الحالية</div>
+            <div class="stats-card-value" id="todayEarnings">2,450</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-value gold" id="withdrawableBalance">9,800</div>
+            <div class="stats-card-label">الرصيد القابل للسحب</div>
+          </div>
+        </div>
+
+        <!-- Referral Section -->
+        <div class="referral-section">
+          <h2 class="section-title">نظام المكافآت</h2>
+          <div class="referral-card">
+            <div class="referral-code-box">
+              <div class="referral-code font-english" id="referralCode">PSG-XK7M9</div>
+              <button class="copy-btn" onclick="copyReferralCode()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+              </button>
+            </div>
+            <div class="referral-stats">
+              <div class="referral-stat">
+                <div class="referral-stat-value">12</div>
+                <div class="referral-stat-label">أعضاء الفريق</div>
+              </div>
+              <div class="referral-stat">
+                <div class="referral-stat-value">3,200</div>
+                <div class="referral-stat-label">نقاط الإحالة</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Packages Page -->
+      <div class="packages-page" id="packagesPage">
+        <div class="tiers-section">
+          <h2 class="section-title">مستويات العضوية</h2>
+          
+          <!-- Basic Tier -->
+          <div class="tier-card basic">
+            <div class="tier-header">
+              <div class="tier-name-row">
+                <div class="tier-icon basic">🥉</div>
+                <span class="tier-name">مبتدئ (Basic)</span>
+              </div>
+              <span class="tier-price font-english">$50</span>
+            </div>
+            <div class="tier-details">
+              <div class="tier-detail">
+                <div class="tier-detail-label">العائد اليومي</div>
+                <div class="tier-detail-value">2,380 نقطة</div>
+              </div>
+              <div class="tier-detail">
+                <div class="tier-detail-label">إجمالي 7 أشهر</div>
+                <div class="tier-detail-value">499,800 نقطة</div>
+              </div>
+            </div>
+            <button class="tier-btn basic">شراء الآن</button>
+          </div>
+
+          <!-- Silver Tier -->
+          <div class="tier-card silver">
+            <div class="tier-header">
+              <div class="tier-name-row">
+                <div class="tier-icon silver">🥈</div>
+                <span class="tier-name">فضي (Silver)</span>
+              </div>
+              <span class="tier-price font-english">$150</span>
+            </div>
+            <div class="tier-details">
+              <div class="tier-detail">
+                <div class="tier-detail-label">العائد اليومي</div>
+                <div class="tier-detail-value">7,140 نقطة</div>
+              </div>
+              <div class="tier-detail">
+                <div class="tier-detail-label">إجمالي 7 أشهر</div>
+                <div class="tier-detail-value">1,499,400 نقطة</div>
+              </div>
+            </div>
+            <button class="tier-btn silver">شراء الآن</button>
+          </div>
+
+          <!-- Gold VIP Tier -->
+          <div class="tier-card gold-vip">
+            <div class="tier-header">
+              <div class="tier-name-row">
+                <div class="tier-icon gold-vip">🥇</div>
+                <span class="tier-name">ذهبي VIP</span>
+              </div>
+              <span class="tier-price font-english">$500</span>
+            </div>
+            <div class="tier-details">
+              <div class="tier-detail">
+                <div class="tier-detail-label">العائد اليومي</div>
+                <div class="tier-detail-value">23,800 نقطة</div>
+              </div>
+              <div class="tier-detail">
+                <div class="tier-detail-label">إجمالي 7 أشهر</div>
+                <div class="tier-detail-value">4,998,000 نقطة</div>
+              </div>
+            </div>
+            <button class="tier-btn gold-vip">شراء الآن</button>
+          </div>
+
+          <!-- Elite Tier -->
+          <div class="tier-card elite">
+            <div class="tier-header">
+              <div class="tier-name-row">
+                <div class="tier-icon elite">💎</div>
+                <span class="tier-name">نخبة (Elite)</span>
+              </div>
+              <span class="tier-price font-english">$1,000</span>
+            </div>
+            <div class="tier-details">
+              <div class="tier-detail">
+                <div class="tier-detail-label">العائد اليومي</div>
+                <div class="tier-detail-value">47,600 نقطة</div>
+              </div>
+              <div class="tier-detail">
+                <div class="tier-detail-label">إجمالي 7 أشهر</div>
+                <div class="tier-detail-value">9,996,000 نقطة</div>
+              </div>
+            </div>
+            <button class="tier-btn elite">شراء الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wallet Page -->
+      <div class="wallet-page" id="walletPage">
+        <div class="wallet-balance">
+          <div class="wallet-balance-label">الرصيد الإجمالي</div>
+          <div class="wallet-balance-value">12,450</div>
+          <div style="color: var(--emerald); font-size: 14px; margin-top: 4px;">نقطة</div>
+        </div>
+        <div class="wallet-actions">
+          <div class="wallet-action-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span class="wallet-action-label">سحب</span>
+          </div>
+          <div class="wallet-action-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span class="wallet-action-label">إيداع</span>
+          </div>
+          <div class="wallet-action-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+              <line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+            <span class="wallet-action-label">تحويل بنكي</span>
+          </div>
+          <div class="wallet-action-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            <span class="wallet-action-label">السجل</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Page -->
+      <div class="profile-page" id="profilePage">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div class="profile-name">مستخدم PSG</div>
+          <div class="profile-email">user@psgdinars.com</div>
+          <div class="vip-badge" style="margin-top: 12px;">VIP Silver</div>
+        </div>
+
+        <div class="profile-menu">
+          <div class="profile-menu-item">
+            <div class="profile-menu-item-right">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <span>معلومات الحساب</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </div>
+          <div class="profile-menu-item">
+            <div class="profile-menu-item-right">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              <span>الإعدادات</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </div>
+          <div class="profile-menu-item">
+            <div class="profile-menu-item-right">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>الأمان</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </div>
+          <div class="profile-menu-item">
+            <div class="profile-menu-item-right">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <span>المساعدة والدعم</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </div>
+        </div>
+
+        <button class="logout-btn" onclick="handleLogout()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          تسجيل الخروج
+        </button>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav">
+        <div class="nav-items">
+          <div class="nav-item active" data-page="home" onclick="navigateTo('home')">
+            <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span class="nav-label">الرئيسية</span>
+          </div>
+          <div class="nav-item" data-page="packages" onclick="navigateTo('packages')">
+            <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="3" y1="9" x2="21" y2="9"/>
+              <line x1="9" y1="21" x2="9" y2="9"/>
+            </svg>
+            <span class="nav-label">الباقات</span>
+          </div>
+          <div class="nav-item" data-page="wallet" onclick="navigateTo('wallet')">
+            <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+              <line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+            <span class="nav-label">المحفظة</span>
+          </div>
+          <div class="nav-item" data-page="profile" onclick="navigateTo('profile')">
+            <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span class="nav-label">الملف الشخصي</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let isLoggedIn = false;
+    let currentPage = 'home';
+    let miningValue = 0;
+    let dailyProgress = 35;
+    let timeRemaining = 23 * 3600 + 45 * 60 + 30;
+
+    // DOM Elements
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const loginScreen = document.getElementById('loginScreen');
+    const mainApp = document.getElementById('mainApp');
+    const toast = document.getElementById('toast');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        loadingOverlay.classList.add('hidden');
+      }, 1500);
+
+      // Start mining counter
+      startMiningCounter();
+
+      // Start progress timer
+      startProgressTimer();
+    });
+
+    // Login Handler
+    function handleLogin(method) {
+      loadingOverlay.classList.remove('hidden');
+      
+      setTimeout(() => {
+        isLoggedIn = true;
+        loginScreen.classList.add('hidden');
+        mainApp.classList.remove('hidden');
+        loadingOverlay.classList.add('hidden');
+      }, 1500);
+    }
+
+    // Logout Handler
+    function handleLogout() {
+      loadingOverlay.classList.remove('hidden');
+      
+      setTimeout(() => {
+        isLoggedIn = false;
+        mainApp.classList.add('hidden');
+        loginScreen.classList.remove('hidden');
+        loadingOverlay.classList.add('hidden');
+        navigateTo('home');
+      }, 1000);
+    }
+
+    // Navigation
+    function navigateTo(page) {
+      currentPage = page;
+      
+      // Update nav items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.page === page) {
+          item.classList.add('active');
+        }
+      });
+
+      // Show/hide pages
+      document.getElementById('homePage').style.display = page === 'home' ? 'block' : 'none';
+      document.getElementById('packagesPage').style.display = page === 'packages' ? 'block' : 'none';
+      document.getElementById('walletPage').style.display = page === 'wallet' ? 'block' : 'none';
+      document.getElementById('profilePage').style.display = page === 'profile' ? 'block' : 'none';
+    }
+
+    // Mining Counter
+    function startMiningCounter() {
+      const counterEl = document.getElementById('miningCounter');
+      const todayEarningsEl = document.getElementById('todayEarnings');
+      
+      setInterval(() => {
+        miningValue += 0.00827;
+        counterEl.textContent = miningValue.toFixed(5);
+        
+        // Update today's earnings periodically
+        const currentEarnings = parseInt(todayEarningsEl.textContent.replace(/,/g, ''));
+        if (Math.random() > 0.95) {
+          todayEarningsEl.textContent = (currentEarnings + 1).toLocaleString();
+        }
+      }, 100);
+    }
+
+    // Progress Timer
+    function startProgressTimer() {
+      const progressTimeEl = document.getElementById('progressTime');
+      const progressFillEl = document.getElementById('progressFill');
+      
+      setInterval(() => {
+        timeRemaining--;
+        if (timeRemaining <= 0) {
+          timeRemaining = 24 * 3600;
+        }
+        
+        const hours = Math.floor(timeRemaining / 3600);
+        const minutes = Math.floor((timeRemaining % 3600) / 60);
+        const seconds = timeRemaining % 60;
+        
+        progressTimeEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        const progress = ((24 * 3600 - timeRemaining) / (24 * 3600)) * 100;
+        progressFillEl.style.width = `${progress}%`;
+      }, 1000);
+    }
+
+    // Copy Referral Code
+    function copyReferralCode() {
+      const code = document.getElementById('referralCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('تم نسخ الكود بنجاح!');
+      }).catch(() => {
+        showToast('فشل النسخ');
+      });
+    }
+
+    // Show Toast
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
